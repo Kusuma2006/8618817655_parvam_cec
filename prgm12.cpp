@@ -1,4 +1,4 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 class Shape{
     public:
@@ -7,6 +7,7 @@ class Shape{
     }
     float areaTriangle(float base,float height){
         return 0.5*base*height;
+
     }
 };
 int main(){
