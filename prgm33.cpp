@@ -1,12 +1,42 @@
-#include<iostream>
-#include<algorithm>
+
+#include <iostream>
 using namespace std;
-int main(){
-    int arr[]={13,7,6,4,3,15,18,20};
-    int n=sizeof(arr)/sizeof(arr[0]);
-    sort(arr,arr+n);
-    cout<<"Sorted array:";
-    for(int i=1;i<n;i+=2)
-    cout<<arr[i]<<" ";
-    return 0;
+
+
+bool isPrime(int n) {
+    
+    
+    if (n <= 1)
+        return false;
+
+
+    for (int i = 2; i < n; i++)
+        if (n % i == 0)
+            return false;
+
+    return true;
+}
+
+
+bool isEmirp(int n) {
+
+    
+    int rev = 0;
+    int val = n;
+    while (val != 0) {
+        int d = val % 10;
+        rev = rev * 10 + d;
+        val /= 10;
+    }
+
+
+    return n != rev && isPrime(n) && isPrime(rev);
+}
+
+int main() {
+    int n = 13; 
+    if (isEmirp(n))
+        cout << "Yes";
+    else
+       cout<<"No";
 }

@@ -1,41 +1,52 @@
+
 #include <iostream>
-using namespace std;
 
-
-bool isPrime(int n) {
-    
-    
-    if (n <= 1)
-        return false;
-
-
-    for (int i = 2; i < n; i++)
-        if (n % i == 0)
-            return false;
-
-    return true;
+int isPrime(int num) {
+    if (num <= 1) return 0;
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) return 0;
+    }
+    return 1;
 }
 
-
-bool isEmirp(int n) {
-
-    
-    int rev = 0;
-    int val = n;
-    while (val != 0) {
-        int d = val % 10;
-        rev = rev * 10 + d;
-        val /= 10;
+int isSphenic(int num) {
+    int factors[3], count = 0, divisorCount = 0;
+    for (int i = 1; i * i <= num; i++) {
+        if (num % i == 0) {
+            divisorCount += (i * i == num) ? 1 : 2;
+        }
     }
+    if (divisorCount != 8) return 0;
+    for (int i = 2; i * i <= num; i++) {
+        while (num % i == 0) { 
 
-
-    return n != rev && isPrime(n) && isPrime(rev);
+            
+            int found = 0;
+            for (int j = 0; j < count; j++) {
+                if (factors[j] == i) found = 1;
+            }
+            if (!found && count < 3) factors[count++] = i;
+            num /= i;
+        }
+    }
+    if (num > 1) {
+        int found = 0;
+        for (int j = 0; j < count; j++) {
+            if (factors[j] == num) found = 1;
+        }
+        if (!found && count < 3) factors[count++] = num;
+    }
+    if (count != 3) return 0;
+    for (int i = 0; i < count; i++) {
+        if (!isPrime(factors[i])) return 0;
+    }
+    return 1;
 }
 
 int main() {
-    int n = 13; 
-    if (isEmirp(n))
-        cout << "Yes";
-    else
-       cout<<"No";
+    int num;
+    std::cout << "Enter a number: ";
+    std::cin >> num;
+    std::cout << num << " is " << (isSphenic(num) ? "" : "not ") << "a sphenic number." << std::endl;
+    return 0;
 }

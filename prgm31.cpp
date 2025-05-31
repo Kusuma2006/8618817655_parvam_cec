@@ -1,12 +1,12 @@
 #include<iostream>
-#include<fstream>
+#include<algorithm>
 using namespace std;
-int main()
-{
-    string text;
-    ifstream MyFile("C:\\Users\\140\\Desktop\\bobs\\sample.txt");
-    getline(MyFile,text);
-    cout<<text;
-    MyFile.close();
+int main(){
+    int arr[]={13,7,6,4,3,15,18,20};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    sort(arr,arr+n);
+    cout<<"Sorted array:";
+    for(int i=1;i<n;i+=2)
+    cout<<arr[i]<<" ";
     return 0;
 }
